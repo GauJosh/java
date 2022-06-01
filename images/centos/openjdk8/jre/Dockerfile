@@ -14,7 +14,7 @@ ENV JAVA_APP_DIR=/deployments \
 #RUN yum install -y \
 #       java-1.8.0-openjdk-1.8.0.322.b06-1.el7_9 \ 
 RUN yum install -y \
-        java-8-openjdk java-8-openjdk-devel \
+        java-1.8.0-openjdk \
     && echo "securerandom.source=file:/dev/urandom" >> /usr/lib/jvm/jre/lib/security/java.security \
     && yum update -y \
            nss nss-util nss-softokn nspr \
