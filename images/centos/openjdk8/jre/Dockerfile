@@ -1,4 +1,4 @@
-FROM oraclelinux:8.6
+FROM almalinux:8.6
 
 USER root
 
