@@ -1,4 +1,4 @@
-FROM centos:centos7.9.2009
+FROM oraclelinux:8.6
 
 USER root
 
