@@ -43,7 +43,7 @@ jobs:
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: fabric8/java-centos-openjdk8-jre
-        IMAGE_TAG: 1.9.2_OracleLinux_8.6
+        IMAGE_TAG: 1.9.2_amazonlinux_2022
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
