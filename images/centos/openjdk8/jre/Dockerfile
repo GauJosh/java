@@ -13,9 +13,15 @@ ENV JAVA_APP_DIR=/deployments \
 # according to http://www.2uo.de/myths-about-urandom/
 #RUN yum install -y \
 #       java-1.8.0-openjdk-1.8.0.322.b06-1.el7_9 \ 
-RUN yum install -y \
-        java-1.8.0-openjdk-1.8.0.20-3.b26.el6 \
-    && echo "securerandom.source=file:/dev/urandom" >> /usr/lib/jvm/jre/lib/security/java.security \
+RUN yum install -y wget tar gzip \
+    && mkdir /usr/java \
+    && cd /usr/java \
+    && wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz" \
+    && tar -xf jdk-8u131-linux-x64.tar.gz \
+    && export JAVA_HOME=/usr/java/jdk1.8.0_131 >> /etc/profile \
+    && export JRE_HOME=/usr/java/jdk1.8.0_131/jre >> /etc/profile \
+    && export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin >> /etc/profile \
+    && echo "securerandom.source=file:/dev/urandom" >> /usr/java/jdk1.8.0_131/jre/lib/security/java.security \
     && yum update -y \
            nss nss-util nss-softokn nspr \
     && yum clean all
