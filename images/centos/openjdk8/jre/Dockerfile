@@ -22,8 +22,8 @@ RUN yum install -y wget tar gzip \
     && export JRE_HOME=/usr/java/jdk1.8.0_131/jre >> /etc/profile \
     && export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin >> /etc/profile \
     && echo "securerandom.source=file:/dev/urandom" >> /usr/java/jdk1.8.0_131/jre/lib/security/java.security \
-    && yum update -y \
-           nss nss-util nss-softokn nspr \
+#    && yum update -y \
+#           nss nss-util nss-softokn nspr \
     && yum clean all
 
 ENV JAVA_HOME /etc/alternatives/jre
