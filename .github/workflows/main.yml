@@ -21,7 +21,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: images/centos/openjdk8/jre
+        working-directory: Docker
    
     steps:
 
