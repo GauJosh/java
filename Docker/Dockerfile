@@ -27,7 +27,7 @@ RUN helm plugin install https://github.com/databus23/helm-diff --version ${HELM_
 RUN set -x && \
     wget https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz && \
     echo Extracting ${HELM_FILENAME}... && \
-    tar zxvf helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz && cp /helmfile /usr/local/bin/ && \
+    tar zxvf helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz && pwd && ls -lrt && cp helmfile /usr/local/bin/ && \
     ls -lrt ./ && \
     echo Listing inside bin... && \
     ls -lrt /usr/local/bin && \
