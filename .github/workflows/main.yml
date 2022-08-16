@@ -42,8 +42,8 @@ jobs:
     - name: Build, tag, and push image to Amazon ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: fabric8/java-centos-openjdk8-jre
-        IMAGE_TAG: 1.0.0_argocd
+        ECR_REPOSITORY: runbuggy/cfstep-helmfile
+        IMAGE_TAG: 3.1.2
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
