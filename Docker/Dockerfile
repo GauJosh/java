@@ -1,6 +1,6 @@
 FROM codefresh/cfstep-helm:3.1.2
 
-ENV HELM_VERSION=3.1.2
+ENV HELM_VERSION=3.9.2
 ENV HELMFILE_VERSION=0.145.3
 ENV HELM_DIFF_VERSION=3.5.0
 ENV HELM_SECRETS_VERSION=3.15.0
@@ -20,13 +20,13 @@ RUN helm plugin install https://github.com/databus23/helm-diff --version ${HELM_
 
 # Install helmfile
 
-ADD https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64 /bin/helmfile
-RUN chmod 0755 /bin/helmfile
+# ADD https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz /bin/helmfile
+# RUN chmod 0755 /bin/helmfile
 
 LABEL helm="${HELM_VERSION}"
 LABEL helmfile="${HELMFILE_VERSION}"
 LABEL helmdiff="${HELM_DIFF_VERSION}"
 
-COPY lib/helmfile.py /helmfile.py
+# COPY lib/helmfile.py /helmfile.py
 
-ENTRYPOINT ["python3", "/helmfile.py"]
+# ENTRYPOINT ["python3", "/helmfile.py"]
