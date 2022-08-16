@@ -20,7 +20,7 @@ RUN helm plugin install https://github.com/databus23/helm-diff --version ${HELM_
 
 # Install helmfile
 
-ADD https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_linux_amd64 /bin/helmfile
+ADD https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64 /bin/helmfile
 RUN chmod 0755 /bin/helmfile
 
 LABEL helm="${HELM_VERSION}"
