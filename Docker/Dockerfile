@@ -1,18 +1,34 @@
-FROM argoproj/argocd:v1.5.7
+ENV HELM_VERSION=3.1.2
 
-USER root
-RUN apt-get update && \
-    apt-get install -y \
-        curl && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+FROM codefresh/cfstep-helm:${HELM_VERSION}
 
-USER argocd
+ENV HELM_VERSION=3.1.2
+ENV HELMFILE_VERSION=0.145.3
+ENV HELM_DIFF_VERSION=3.5.0
+ENV HELM_SECRETS_VERSION=3.15.0
 
-# ARG GCS_PLUGIN_VERSION="0.3.5"
-# ARG GCS_PLUGIN_REPO="https://github.com/hayorov/helm-gcs.git"
+# Install required Alpine packages
 
-RUN helm plugin install https://github.com/chartmuseum/helm-push
+RUN apk add --update \
+    linux-headers \
+    git \
+    python3 && \
+    rm -rf /var/cache/apk/*
 
-ENV HELM_PLUGINS="/home/argocd/.local/share/helm/plugins/"
-ENV HELM_REPO_KEY_FILE=6285884658067858c376d985.8d74da00942b61fc76bfda1fea9cdbbb
+# Install helmfile plugin deps
+
+RUN helm plugin install https://github.com/databus23/helm-diff --version ${HELM_DIFF_VERSION} && \
+    helm plugin install https://github.com/futuresimple/helm-secrets --version ${HELM_SECRETS_VERSION}
+
+# Install helmfile
+
+ADD https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_linux_amd64 /bin/helmfile
+RUN chmod 0755 /bin/helmfile
+
+LABEL helm="${HELM_VERSION}"
+LABEL helmfile="${HELMFILE_VERSION}"
+LABEL helmdiff="${HELM_DIFF_VERSION}"
+
+COPY lib/helmfile.py /helmfile.py
+
+ENTRYPOINT ["python3", "/helmfile.py"]
