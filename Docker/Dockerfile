@@ -1,6 +1,4 @@
-ENV HELM_VERSION=3.1.2
-
-FROM codefresh/cfstep-helm:${HELM_VERSION}
+FROM codefresh/cfstep-helm:3.1.2
 
 ENV HELM_VERSION=3.1.2
 ENV HELMFILE_VERSION=0.145.3
