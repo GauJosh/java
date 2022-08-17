@@ -40,5 +40,5 @@ LABEL helm="${HELM_VERSION}"
 LABEL helmfile="${HELMFILE_VERSION}"
 LABEL helmdiff="${HELM_DIFF_VERSION}"
 
-COPY lib/helmfile.py /helmfile.py
+COPY helmfile.py /helmfile.py
 ENTRYPOINT ["python3", "/helmfile.py"]
