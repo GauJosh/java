@@ -31,9 +31,10 @@ RUN set -x && \
     ls -lrt ./ && \
     echo Listing inside bin... && \
     ls -lrt /usr/local/bin && \
-    rm helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz && \
+    rm helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz
 
-RUN chmod 0755 /usr/local/bin/helmfile
+RUN chmod 0777 /usr/local/bin/helmfile && \
+    ls -lrt /usr/local/bin
 
 LABEL helm="${HELM_VERSION}"
 LABEL helmfile="${HELMFILE_VERSION}"
