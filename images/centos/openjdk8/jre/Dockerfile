@@ -1,4 +1,4 @@
-FROM amazonlinux:2022
+FROM oraclelinux:8.6
 
 USER root
 
