@@ -54,7 +54,7 @@ RUN groupadd -r jboss -g 1000 \
   && chmod -R "g+rwX" /deployments \
   && chown -R jboss:root /deployments
 
-USER jboss
+USER root
 
 
 CMD [ "/deployments/run-java.sh" ]
