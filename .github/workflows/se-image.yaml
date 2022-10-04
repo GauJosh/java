@@ -11,7 +11,7 @@ on:
       baseimage:
         description: 'Provide dockerfile name to create base image :: '
         required: true
-        default: 'Dockerfile_SE'
+        default: 'Dockerfile'
 jobs:
   
   build:
@@ -21,7 +21,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: Docker
+        working-directory: Docker/SE
    
     steps:
 
