@@ -42,7 +42,7 @@ jobs:
     - name: Build, tag, and push image to Amazon ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: fabric8/java-centos-openjdk8-jre
+        ECR_REPOSITORY: fabric8/java-oraclelinux-openjdk17-jre
         IMAGE_TAG: 1.0.0_Java17_OracleLinux_8.6
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
