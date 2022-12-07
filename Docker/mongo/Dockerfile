@@ -3,3 +3,7 @@ USER root
 
 COPY mongodb-org-6.0.repo /etc/yum.repos.d/mongodb-org-6.0.repo
 RUN yum install -y mongodb-mongosh
+
+RUN mkdir /apps
+COPY query.js /apps
+WORKDIR /apps
