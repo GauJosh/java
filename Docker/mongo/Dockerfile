@@ -1,2 +1,5 @@
+FROM 236900137235.dkr.ecr.us-west-2.amazonaws.com/fabric8/java-centos-openjdk8-jre:1.9.6_OracleLinux_8.6
+USER root
 
-curl -X GET https://downloads.mongodb.com/compass/mongodb-mongosh-1.6.1.x86_64.rpm -o mongosh.rpm
+COPY mongodb-org-6.0.repo /etc/yum.repos.d/mongodb-org-6.0.repo
+RUN yum install -y mongodb-mongosh
