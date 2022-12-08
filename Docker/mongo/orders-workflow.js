@@ -94,3 +94,114 @@ print(db.getCollection('taskConfigVariableGroup').update({ $or: [ {tenantId: {$e
 print(db.getCollection('payment').update({ $or: [ {tenantId: {$exists: false}}, {tenantId: null} ] }, {$set: {tenantId:'runbuggy'}} , {multi: true}))
 print(db.getCollection('payout').update({ $or: [ {tenantId: {$exists: false}}, {tenantId: null} ] }, {$set: {tenantId:'runbuggy'}} , {multi: true}))
 print(db.getCollection('charge').update({ $or: [ {tenantId: {$exists: false}}, {tenantId: null} ] }, {$set: {tenantId:'runbuggy'}} , {multi: true}))
+
+// add index for tenantId
+print(db.getCollection("order").dropIndex("tenant"))
+print(db.getCollection("order").createIndex(
+  {
+    "tenantId" : 1
+  },
+  {
+    name: "tenant"
+  }
+))
+
+print(db.getCollection("orderFull").dropIndex("tenant"))
+print(db.getCollection("orderFull").createIndex(
+  {
+    "tenantId" : 1
+  },
+  {
+    name: "tenant"
+  }
+))
+
+print(db.getCollection("transportationOrder").dropIndex("tenant"))
+print(db.getCollection("transportationOrder").createIndex(
+  {
+    "tenantId" : 1
+  },
+  {
+    name: "tenant"
+  }
+))
+
+print(db.getCollection("transportationOrderFull").dropIndex("tenant"))
+print(db.getCollection("transportationOrderFull").createIndex(
+  {
+    "tenantId" : 1
+  },
+  {
+    name: "tenant"
+  }
+))
+
+print(db.getCollection("vehicleTransferOrder").dropIndex("tenant"))
+print(db.getCollection("vehicleTransferOrder").createIndex(
+  {
+    "tenantId" : 1
+  },
+  {
+    name: "tenant"
+  }
+))
+
+print(db.getCollection("vehicleTransferOrderFull").dropIndex("tenant"))
+print(db.getCollection("vehicleTransferOrderFull").createIndex(
+  {
+    "tenantId" : 1
+  },
+  {
+    name: "tenant"
+  }
+))
+
+print(db.getCollection("taskConfig").dropIndex("tenant"))
+print(db.getCollection("taskConfig").createIndex(
+  {
+    "tenantId" : 1
+  },
+  {
+    name: "tenant"
+  }
+))
+
+print(db.getCollection("taskConfigVariableGroup").dropIndex("tenant"))
+print(db.getCollection("taskConfigVariableGroup").createIndex(
+  {
+    "tenantId" : 1
+  },
+  {
+    name: "tenant"
+  }
+))
+
+print(db.getCollection("payment").dropIndex("tenant"))
+print(db.getCollection("payment").createIndex(
+  {
+    "tenantId" : 1
+  },
+  {
+    name: "tenant"
+  }
+))
+
+print(db.getCollection("payout").dropIndex("tenant"))
+print(db.getCollection("payout").createIndex(
+  {
+    "tenantId" : 1
+  },
+  {
+    name: "tenant"
+  }
+))
+
+print(db.getCollection("charge").dropIndex("tenant"))
+print(db.getCollection("charge").createIndex(
+  {
+    "tenantId" : 1
+  },
+  {
+    name: "tenant"
+  }
+))
