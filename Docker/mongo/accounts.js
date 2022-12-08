@@ -89,3 +89,14 @@ print(db.getCollection('account')
     ]))
 
 print(db.getCollection('account').update({ $or: [ {tenantId: {$exists: false}}, {tenantId: null} ] }, {$set: {tenantId:'runbuggy'}} , {multi: true}))
+
+// add index for tenantId
+print(db.getCollection("account").dropIndex("tenant"))
+print(db.getCollection("account").createIndex(
+  {
+    "tenantId" : 1
+  },
+  {
+    name: "tenant"
+  }
+))
