@@ -1,10 +1,10 @@
-# remove lastModifiedBy as it was imported as a String but in the code it should be User which impacts reading those entries
+// remove lastModifiedBy as it was imported as a String but in the code it should be User which impacts reading those entries
 
 print(db.getCollection('setting').update({}, {$unset: {lastModifiedBy:1}} , {multi: true}))
 print(db.getCollection('featureAccess').update({}, {$unset: {lastModifiedBy:1}} , {multi: true}))
 
 
-# remove backup of TenantAware collections
+// remove backup of TenantAware collections
 
 print(db.getCollection('order_backup').drop( { writeConcern: { w: 1 } } ))
 print(db.getCollection('orderFull_backup').drop( { writeConcern: { w: 1 } } ))
@@ -18,7 +18,7 @@ print(db.getCollection('payment_backup').drop( { writeConcern: { w: 1 } } ))
 print(db.getCollection('payout_backup').drop( { writeConcern: { w: 1 } } ))
 print(db.getCollection('charge_backup').drop( { writeConcern: { w: 1 } } ))
 
-# create backup of TenantAware collections
+// create backup of TenantAware collections
 
 print(db.getCollection('order')
     .aggregate([
@@ -80,7 +80,7 @@ print(db.getCollection('charge')
     ]))
 
 
-#add tenantId=runbuggy if tenantId is missing or tenantId is null
+//add tenantId=runbuggy if tenantId is missing or tenantId is null
 
 
 print(db.getCollection('order').update({ $or: [ {tenantId: {$exists: false}}, {tenantId: null} ] }, {$set: {tenantId:'runbuggy'}} , {multi: true}))

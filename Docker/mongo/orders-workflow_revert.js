@@ -1,5 +1,5 @@
-#clear current TenantAware collection
-#use clear collection to preserve indexes instead of rename collection which will create a new collection from the backup if the collection is not there when using aggregation to create the collection
+//clear current TenantAware collection
+//use clear collection to preserve indexes instead of rename collection which will create a new collection from the backup if the collection is not there when using aggregation to create the collection
 
 print(db.getCollection('order').deleteMany({}))
 print(db.getCollection('orderFull').deleteMany({}))
@@ -15,7 +15,7 @@ print(db.getCollection('charge').deleteMany({}))
 
 
 
-# restore from original collection
+// restore from original collection
 print(db.getCollection('order_backup')
     .aggregate([
         { $out: 'order' }

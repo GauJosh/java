@@ -1,4 +1,4 @@
-# create backup of user collection
+// create backup of user collection
 print(db.getCollection('user_backup').drop( { writeConcern: { w: 1 } } ))
 
 print(db.getCollection('user')
@@ -8,7 +8,7 @@ print(db.getCollection('user')
 
 
 
-#create user_tenant collection
+//create user_tenant collection
 
 print(db.getCollection('user').aggregate([
  {$match: {"accounts": {$elemMatch: {"_id": {$exists: true}, "tenantId": {$exists: false}}}}},
@@ -43,7 +43,7 @@ print(db.getCollection('user').aggregate([
 
 
 
-#merge user_tenant collection into user collection
+//merge user_tenant collection into user collection
 
 print(db.getCollection('user_tenant').aggregate([
   {$match: {}},
@@ -52,12 +52,12 @@ print(db.getCollection('user_tenant').aggregate([
 ]))
 
 
-#remove tenantId from the user
+//remove tenantId from the user
 
 print(db.getCollection('user').update({}, {$unset: {tenantId:1}} , {multi: true}))
 
 
-#recreate account_name_address_tenant index
+//recreate account_name_address_tenant index
 
 print(db.getCollection("account").dropIndex("account_name_address_tenant"))
 print(db.getCollection("account").createIndex(
@@ -72,16 +72,16 @@ print(db.getCollection("account").createIndex(
   }
 ))
 
-#remove account_name_address index
+//remove account_name_address index
 
 print(db.getCollection("account").dropIndex( "account_name_address" ))
 
 
-# drop any backup of account collection
+// drop any backup of account collection
 
 print(db.getCollection('account_backup').drop( { writeConcern: { w: 1 } } ))
 
-# create backup of account collection
+// create backup of account collection
 
 print(db.getCollection('account')
     .aggregate([
