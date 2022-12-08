@@ -1,0 +1,81 @@
+#clear current TenantAware collection
+#use clear collection to preserve indexes instead of rename collection which will create a new collection from the backup if the collection is not there when using aggregation to create the collection
+
+db.getCollection('order').deleteMany({});
+db.getCollection('orderFull').deleteMany({});
+db.getCollection('transportationOrder').deleteMany({});
+db.getCollection('transportationOrderFull').deleteMany({});
+db.getCollection('vehicleTransferOrder').deleteMany({});
+db.getCollection('vehicleTransferOrderFull').deleteMany({});
+db.getCollection('taskConfig').deleteMany({});
+db.getCollection('taskConfigVariableGroup').deleteMany({});
+db.getCollection('payment').deleteMany({});
+db.getCollection('payout').deleteMany({});
+db.getCollection('charge').deleteMany({});
+
+
+
+# restore from original collection
+db.getCollection('order_backup')
+    .aggregate([
+        { $out: 'order' }
+    ]);
+
+db.getCollection('orderFull_backup')
+    .aggregate([
+        { $out: 'orderFull' }
+    ]);
+
+db.getCollection('transportationOrder_backup')
+    .aggregate([
+        { $out: 'transportationOrder' }
+    ]);
+
+    
+db.getCollection('transportationOrderFull_backup')
+    .aggregate([
+        { $out: 'transportationOrderFull' }
+    ]);
+    
+    
+db.getCollection('vehicleTransferOrder_backup')
+    .aggregate([
+        { $out: 'vehicleTransferOrder' }
+    ]);
+
+
+db.getCollection('vehicleTransferOrderFull_backup')
+    .aggregate([
+        { $out: 'vehicleTransferOrderFull' }
+    ]);    
+    
+    
+db.getCollection('taskConfig_backup')
+    .aggregate([
+        { $out: 'taskConfig' }
+    ]);
+    
+db.getCollection('taskConfigVariableGroup_backup')
+    .aggregate([
+        { $out: 'taskConfigVariableGroup' }
+    ]);
+    
+
+db.getCollection('payment_backup')
+    .aggregate([
+        { $out: 'payment' }
+    ]);
+    
+    
+db.getCollection('payout_backup')
+    .aggregate([
+        { $out: 'payout' }
+    ]);
+    
+    
+db.getCollection('charge_backup')
+    .aggregate([
+        { $out: 'charge' }
+    ]);
+    
+    
