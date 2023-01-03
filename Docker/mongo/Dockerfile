@@ -5,5 +5,5 @@ COPY mongodb-org-6.0.repo /etc/yum.repos.d/mongodb-org-6.0.repo
 RUN yum install -y mongodb-mongosh
 
 RUN mkdir /apps
-COPY orders-workflow_revert.js orders-workflow.js accounts.js accounts_revert.js /apps/
+COPY orders-workflow_revert.js orders-workflow.js accounts.js accounts_revert.js tasks.js /apps/
 WORKDIR /apps
