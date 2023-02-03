@@ -41,10 +41,12 @@ jobs:
     - name: Pull and Push image to ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: alertlogic/al-agent-container
-        IMAGE_TAG: latest
+        ECR_REPOSITORY: fluent/fluent-bit
+        IMAGE_TAG: 2.0.8
       run: |
-        docker pull alertlogic/al-agent-container:latest
-        docker image tag alertlogic/al-agent-container:latest $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker pull fluent/fluent-bit:2.0.8
+        #docker pull alertlogic/al-agent-container:latest
+        #docker image tag alertlogic/al-agent-container:latest $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker image tag fluent/fluent-bit:2.0.8 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         docker images -a
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
