@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
     inputs:
       baseimage:
-        description: 'Want to push image to ECR'
+        description: 'Want to push image to ECR?'
         required: true
         default: 'Yes'
 jobs:
@@ -41,12 +41,14 @@ jobs:
     - name: Pull and Push image to ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: fluent/fluent-bit
-        IMAGE_TAG: 2.0.8
+        ECR_REPOSITORY: jaegertracing/jaeger-agent
+        IMAGE_TAG: 1.28.0
       run: |
-        docker pull fluent/fluent-bit:2.0.8
+        docker pull jaegertracing/jaeger-agent:1.28.0
+        #docker pull fluent/fluent-bit:2.0.8
         #docker pull alertlogic/al-agent-container:latest
         #docker image tag alertlogic/al-agent-container:latest $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        docker image tag fluent/fluent-bit:2.0.8 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        #docker image tag fluent/fluent-bit:2.0.8 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker image tag jaegertracing/jaeger-agent:1.28.0 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         docker images -a
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
