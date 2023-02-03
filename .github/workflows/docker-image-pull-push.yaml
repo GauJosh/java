@@ -41,14 +41,19 @@ jobs:
     - name: Pull and Push image to ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: jaegertracing/jaeger-agent
-        IMAGE_TAG: 1.28.0
+        ECR_REPOSITORY: falcosecurity/falco/falco-no-driver
+        IMAGE_TAG: 0.32.2
       run: |
-        docker pull jaegertracing/jaeger-agent:1.28.0
+        docker pull falcosecurity/falco-no-driver:0.32.2
+        docker pull falcosecurity/falco-driver-loader:0.32.2
+        #docker pull jaegertracing/jaeger-agent:1.28.0
         #docker pull fluent/fluent-bit:2.0.8
         #docker pull alertlogic/al-agent-container:latest
         #docker image tag alertlogic/al-agent-container:latest $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         #docker image tag fluent/fluent-bit:2.0.8 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        docker image tag jaegertracing/jaeger-agent:1.28.0 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        #docker image tag jaegertracing/jaeger-agent:1.28.0 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker image tag falcosecurity/falco-no-driver:0.32.2 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker image tag falcosecurity/falco-driver-loader:0.32.2 $ECR_REGISTRY/falcosecurity/falco/falco-driver-loader:0.32.2
         docker images -a
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker push $ECR_REGISTRY/falcosecurity/falco/falco-driver-loader:0.32.2
