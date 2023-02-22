@@ -8,10 +8,23 @@ on:
 #      - 'Dockerfile'
   workflow_dispatch:
     inputs:
-      baseimage:
-        description: 'Want to push image to ECR?'
-        required: true
-        default: 'Yes'
+#       baseimage:
+#         description: 'Want to push image to ECR?'
+#         required: true
+#         default: 'Yes'
+      ECR_REPOSITORY:
+         type: choice
+         description: ECR_REPOSITORY
+         options:
+           - 'jaegertracing/jaeger-agent'
+           - 'falcosecurity/falco-no-driver'
+           - 'fluent/fluent-bit'
+           - 'falcosecurity/falco-driver-loader'
+           - 'alertlogic/al-agent-container'
+      IMAGE_TAG:
+         description: IMAGE_TAG
+         default: 1.0.0
+
 jobs:
   
   build:
