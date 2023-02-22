@@ -18,8 +18,12 @@ on:
          options:
            - 'jaegertracing/jaeger-agent'
            - 'falcosecurity/falco-no-driver'
-           - 'fluent/fluent-bit'
+           - 'falcosecurity/falcoctl'
            - 'falcosecurity/falco-driver-loader'
+           - 'falcosecurity/falcosidekick'
+           - 'falcosecurity/falcosidekick-ui'
+           - 'redislabs/redisearch'
+           - 'fluent/fluent-bit'
            - 'alertlogic/al-agent-container'
       IMAGE_TAG:
          description: IMAGE_TAG
@@ -54,19 +58,24 @@ jobs:
     - name: Pull and Push image to ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: jaegertracing/jaeger-agent
-        IMAGE_TAG: 1.30.0
+        ECR_REPOSITORY: ${{ github.event.inputs.ECR_REPOSITORY }}
+        IMAGE_TAG: ${{ github.event.inputs.IMAGE_TAG }}
       run: |
+        docker pull $ECR_REPOSITORY:$IMAGE_TAG
+        docker image tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        docker images -a
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        #ignore below#
         #docker pull falcosecurity/falco-no-driver:0.32.2
         #docker pull falcosecurity/falco-driver-loader:0.32.2
-        docker pull jaegertracing/jaeger-agent:1.30.0
+        #docker pull jaegertracing/jaeger-agent:1.30.0
         #docker pull fluent/fluent-bit:2.0.8
         #docker pull alertlogic/al-agent-container:latest
         #docker image tag alertlogic/al-agent-container:latest $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         #docker image tag fluent/fluent-bit:2.0.8 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        docker image tag jaegertracing/jaeger-agent:1.30.0 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        #docker image tag jaegertracing/jaeger-agent:1.30.0 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         #docker image tag falcosecurity/falco-no-driver:0.32.2 $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         #docker image tag falcosecurity/falco-driver-loader:0.32.2 $ECR_REGISTRY/falcosecurity/falco/falco-driver-loader:0.32.2
-        docker images -a
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        #docker images -a
+        #docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         #docker push $ECR_REGISTRY/falcosecurity/falco/falco-driver-loader:0.32.2
