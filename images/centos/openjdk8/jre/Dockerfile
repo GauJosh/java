@@ -17,7 +17,7 @@ RUN yum install -y \
         java-1.8.0-openjdk \
     && echo "securerandom.source=file:/dev/urandom" >> /usr/lib/jvm/jre/lib/security/java.security \
     && yum update -y \
-           nss nss-util nss-softokn nspr systemd systemd-libs systemd-pam expat sqlite-libs zlib freetype libtasn1 \
+           nss nss-util nss-softokn nspr systemd systemd-libs systemd-pam expat sqlite-libs zlib freetype libtasn1 libksba \
     && yum clean all
 
 ENV JAVA_HOME /etc/alternatives/jre
