@@ -25,6 +25,7 @@ on:
            - 'redislabs/redisearch'
            - 'fluent/fluent-bit'
            - 'alertlogic/al-agent-container'
+           - 'mysql'
       IMAGE_TAG:
          description: IMAGE_TAG
          default: 1.0.0
