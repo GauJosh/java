@@ -18,7 +18,7 @@ RUN yum install -y \
     && echo "securerandom.source=file:/dev/urandom" >> /usr/lib/jvm/jre/lib/security/java.security \
     && yum update -y \
            nss nss-util nss-softokn nspr systemd systemd-libs systemd-pam expat sqlite-libs zlib freetype libtasn1 libksba \
-           bind-export-libs glib2 platform-python python3-libs \
+           bind-export-libs glib2 platform-python python3-libs openssl openssl-libs curl libcurl \
     && yum clean all
 
 ENV JAVA_HOME /etc/alternatives/jre
